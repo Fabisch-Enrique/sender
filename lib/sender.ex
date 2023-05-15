@@ -24,7 +24,7 @@ defmodule Sender do
 
   def notify_all(emails) do
     emails
-    |> Task.async_stream(&send_email/1)
+    |> Task.async_stream(&send_email/1, on_timeout: :kill_task)
     |> Enum.to_list()
   end
 end
